@@ -2,18 +2,15 @@ package main
 
 import (
 	"encoding/xml"
+	"github.com/bmatcuk/doublestar"
 	"io"
 	"os"
-	"path"
-
-	"github.com/bmatcuk/doublestar"
+	"strings"
 )
 
 type junitXML struct {
-	TestCases []struct {
-		File string  `xml:"file,attr"`
-		Time float64 `xml:"time,attr"`
-	} `xml:"testcase"`
+	Name string  `xml:"name,attr"`
+	Time float64 `xml:"time,attr"`
 }
 
 func loadJUnitXML(reader io.Reader) *junitXML {
@@ -28,15 +25,15 @@ func loadJUnitXML(reader io.Reader) *junitXML {
 	return &junitXML
 }
 
-func addFileTimesFromIOReader(fileTimes map[string]float64, reader io.Reader) {
+func addFileTimesFromIOReader(fileTimes map[string]float64, reader io.Reader, filename string, prefix string, postfix string) {
 	junitXML := loadJUnitXML(reader)
-	for _, testCase := range junitXML.TestCases {
-		filePath := path.Clean(testCase.File)
-		fileTimes[filePath] += testCase.Time
-	}
+	printMsg("using test times from JUnit report %s\n", filename)
+	filePath := prefix + strings.Replace(junitXML.Name, ".", "/", -1) + postfix
+	printMsg("converted test name to %s\n", filePath)
+	fileTimes[filePath] = junitXML.Time
 }
 
-func getFileTimesFromJUnitXML(fileTimes map[string]float64) {
+func getFileTimesFromJUnitXML(fileTimes map[string]float64, prefix string, postfix string) {
 	if junitXMLPath != "" {
 		filenames, err := doublestar.Glob(junitXMLPath)
 		if err != nil {
@@ -47,12 +44,8 @@ func getFileTimesFromJUnitXML(fileTimes map[string]float64) {
 			if err != nil {
 				fatalMsg("failed to open junit xml: %v\n", err)
 			}
-			printMsg("using test times from JUnit report %s\n", junitFilename)
-			addFileTimesFromIOReader(fileTimes, file)
+			addFileTimesFromIOReader(fileTimes, file, junitFilename, prefix, postfix)
 			file.Close()
 		}
-	} else {
-		printMsg("using test times from JUnit report at stdin\n")
-		addFileTimesFromIOReader(fileTimes, os.Stdin)
 	}
 }

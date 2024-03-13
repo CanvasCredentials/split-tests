@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.Feature" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-03-13T13:28:41" hostname="4f29e4bb9aea" time="17.3">
+    <properties/>
+    <testcase name="test name" classname="com.example.Feature" time="14.946"/>
+</testsuite>
