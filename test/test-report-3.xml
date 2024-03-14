@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.NotExisting" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-03-13T13:28:41" hostname="4f29e4bb9aea" time="10">
+    <properties/>
+    <testcase name="execute" classname="com.example.NotExisting" time="8"/>
+    <system-out><![CDATA[]]></system-out>
+    <system-err><![CDATA[]]></system-err>
+</testsuite>

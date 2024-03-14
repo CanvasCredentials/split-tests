@@ -27,9 +27,7 @@ func loadJUnitXML(reader io.Reader) *junitXML {
 
 func addFileTimesFromIOReader(fileTimes map[string]float64, reader io.Reader, filename string, prefix string, postfix string) {
 	junitXML := loadJUnitXML(reader)
-	printMsg("using test times from JUnit report %s\n", filename)
 	filePath := prefix + strings.Replace(junitXML.Name, ".", "/", -1) + postfix
-	printMsg("converted test name to %s\n", filePath)
 	fileTimes[filePath] = junitXML.Time
 }
 
@@ -39,6 +37,7 @@ func getFileTimesFromJUnitXML(fileTimes map[string]float64, prefix string, postf
 		if err != nil {
 			fatalMsg("failed to match jUnit filename pattern: %v", err)
 		}
+		numberOfReports := 0
 		for _, junitFilename := range filenames {
 			file, err := os.Open(junitFilename)
 			if err != nil {
@@ -46,6 +45,8 @@ func getFileTimesFromJUnitXML(fileTimes map[string]float64, prefix string, postf
 			}
 			addFileTimesFromIOReader(fileTimes, file, junitFilename, prefix, postfix)
 			file.Close()
+			numberOfReports++
 		}
+		printMsg("found %d JUnit XML report files\n", numberOfReports)
 	}
 }

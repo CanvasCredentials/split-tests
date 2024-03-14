@@ -9,7 +9,6 @@ import (
 	"github.com/bmatcuk/doublestar"
 )
 
-var useJUnitXML bool
 var junitXMLPath string
 var testFilePattern = ""
 var testFilePrefix = ""
@@ -35,6 +34,7 @@ func removeDeletedFiles(fileTimes map[string]float64, currentFileSet map[string]
 	for file := range fileTimes {
 		if !currentFileSet[file] {
 			delete(fileTimes, file)
+			printMsg("no test found for file: %s\n", file)
 		}
 	}
 }
@@ -54,9 +54,7 @@ func addNewFiles(fileTimes map[string]float64, currentFileSet map[string]bool) {
 		if _, isSet := fileTimes[file]; isSet {
 			continue
 		}
-		if useJUnitXML {
-			printMsg("missing file time for %s\n", file)
-		}
+		printMsg("missing file time for %s\n", file)
 		fileTimes[file] = averageFileTime
 	}
 }
@@ -92,7 +90,6 @@ func parseFlags() {
 
 func main() {
 	parseFlags()
-	printMsg("prefix: %s, postfix: %s", testFilePrefix, testFilePostfix)
 
 	// We are not using filepath.Glob,
 	// because it doesn't support '**' (to match all files in all nested directories)

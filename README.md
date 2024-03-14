@@ -16,6 +16,23 @@ Download and extract the latest build from the releases page.
 split_tests -junit -junit-path=report.xml -split-index=0 -split-total=2
 ```
 
+### Development
+### Build
+```bash
+go build main.go junit.go split_files.go
+```
+
+### Run/test
+```bash
+./main -junit-path="./test/**.xml" -split-index=1 -split-total=2 -glob="src/**/*.kt" -prefix="src/" -postfix=".kt"
+```
+
+
+## Deployment
+
+- Install Go
+- Checkout the code
+- `make`
 
 ## Arguments
 
@@ -42,8 +59,3 @@ $./split_tests -help
         Total number of containers (or set CIRCLE_NODE_TOTAL) (default -1)
 ```
 
-## Development
-
-- Install Go
-- Checkout the code
-- `make`
