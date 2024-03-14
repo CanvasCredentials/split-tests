@@ -35,16 +35,15 @@ go build main.go junit.go split_files.go
 - `make`
 
 ## Arguments
-
 ```plain
 $./split_tests -help
 
   -glob 'pattern'
         Glob pattern to find test files (default 'spec/**/*_spec.rb'). Make sure to single-quote the pattern to avoid shell expansion.
   -prefix 'string'
-        Glob pattern to find test files (default 'spec/**/*_spec.rb'). Make sure to single-quote the pattern to avoid shell expansion.
+        Enables to specify a prefix to align naming of the test files with the name in the JUnit report.
   -postfix 'string'
-        Glob pattern to find test files (default 'spec/**/*_spec.rb'). Make sure to single-quote the pattern to avoid shell expansion.
+        Enables to specify a postfix to align naming of the test files with the name in the JUnit report.
   -exclude-glob 'pattern'
         Glob pattern to exclude test files. Make sure to single-quote as well.
   -help

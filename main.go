@@ -62,7 +62,7 @@ func addNewFiles(fileTimes map[string]float64, currentFileSet map[string]bool) {
 func parseFlags() {
 	flag.StringVar(&testFilePattern, "glob", "spec/**/*_spec.rb", "Glob pattern to find test files. Make sure to single-quote to avoid shell expansion.")
 	flag.StringVar(&testFilePrefix, "prefix", "", "Enables to specify a prefix to align naming of the test files with the name in the JUnit report.")
-	flag.StringVar(&testFilePostfix, "postfix", "", "Enables to specify a prefix to align naming of the test files with the name in the JUnit report.")
+	flag.StringVar(&testFilePostfix, "postfix", "", "Enables to specify a postfix to align naming of the test files with the name in the JUnit report.")
 	flag.StringVar(&excludeFilePattern, "exclude-glob", "", "Glob pattern to exclude test files. Make sure to single-quote.")
 
 	flag.IntVar(&splitIndex, "split-index", -1, "This test container's index")
