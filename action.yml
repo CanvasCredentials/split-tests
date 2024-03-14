@@ -30,10 +30,9 @@ runs:
   using: composite
   steps:
     - name: Download Split Tests
-      id: split-tests
       shell: bash
       run: |
-        gh release download v0.4 --repo CanvasCredentials/split-tests
+        gh release download v0.5 --repo CanvasCredentials/split-tests
         gunzip split_tests.linux.gz -v > split_tests && chmod +x split_tests
     - name: Split Tests
       id: split-tests
