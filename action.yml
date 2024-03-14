@@ -1,0 +1,11 @@
+name: Split Tests
+author: martin.tarjanyi@instructure.com
+description: Splits test suite for parallelization with equal time
+runs:
+  using: composite
+  steps:
+    - name: Split Tests
+      id: split-tests
+      shell: bash
+      run: |
+          echo "Hello world!"
