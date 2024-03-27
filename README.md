@@ -13,7 +13,7 @@ Download and extract the latest build from the releases page.
 ### Using a JUnit report
 
 ```
-split_tests -junit -junit-path=report.xml -split-index=0 -split-total=2
+split_tests -junit-path=report.xml -split-index=0 -split-total=2
 ```
 
 ### Development
@@ -24,7 +24,8 @@ go build main.go junit.go split_files.go
 
 ### Run/test
 ```bash
-./main -junit-path="./test/**.xml" -split-index=1 -split-total=2 -glob="src/**/*.kt" -prefix="src/" -postfix=".kt"
+cd ./example
+../main -junit-path="./test/**.xml" -split-index=1 -split-total=2 -glob="src/**/*.kt" -prefix="src/" -postfix=".kt"
 ```
 
 
@@ -48,8 +49,6 @@ $./split_tests -help
         Glob pattern to exclude test files. Make sure to single-quote as well.
   -help
         Show this help text
-  -junit
-        Use a JUnit XML report for test times
   -junit-path string
         Path to a JUnit XML report (leave empty to read from stdin; use glob pattern to load multiple files)
   -split-index int
